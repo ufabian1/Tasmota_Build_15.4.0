@@ -1,65 +1,91 @@
 #ifndef _USER_CONFIG_OVERRIDE_H_
 #define _USER_CONFIG_OVERRIDE_H_
 
+// ===== Pflicht für dein Setup =====
 #define USE_SCRIPT
 #define USE_SML_M
 #define USE_DS18x20
 
+// Smart Meter Empfehlung laut Tasmota
 #ifdef USE_RULES
 #undef USE_RULES
 #endif
 
+// sehr oft nötig für Script/SML
 #define USE_UFILESYS
 
-// Sprache klein halten
-#define LANGUAGE_EN_GB
+// ============================
+// GROSSE MODULE ENTFERNEN
+// ============================
 
-// BERRY raus
-#undef USE_BERRY
-#undef USE_BERRY_INVOCATION
-
-// MQTT raus (nur WebAPI)
-#undef USE_MQTT
-#undef USE_MQTT_TLS
-
-// große Module raus
+// Zigbee / Display / KNX
 #undef USE_ZIGBEE_ZNP
 #undef USE_DISPLAY
 #undef USE_KNX
 #undef USE_TUYA_MCU
 
-// Licht raus
+// Lighting (großer Block!)
 #undef USE_LIGHT
+#undef USE_LIGHT_PALETTE
 #undef USE_WS2812
+#undef USE_SM16716
+#undef USE_SM2135
+#undef USE_MY92X1
 
-// Dimmer raus
-#undef USE_SHUTTER
+// Dimmer / Shutter
 #undef USE_PWM_DIMMER
+#undef USE_SHUTTER
+#undef USE_SONOFF_D1
+#undef USE_SHELLY_DIMMER
+#undef USE_EXS_DIMMER
+
+// Energie-Module (du nutzt SML → alles raus)
+#undef USE_PZEM004T
+#undef USE_PZEM_AC
+#undef USE_PZEM_DC
+#undef USE_MCP39F501
+#undef USE_ADE7953
+#undef USE_BL0940
 
 // Integrationen raus
 #undef USE_HOME_ASSISTANT
 #undef USE_DOMOTICZ
+#undef USE_EMULATION_HUE
+#undef USE_EMULATION_WEMO
 
-// Sensoren minimieren
+// Kommunikation / Extras
+#undef USE_DEVICE_GROUPS
+#undef USE_SERIAL_BRIDGE
+#undef USE_IR_REMOTE
+#undef USE_IR_RECEIVE
+#undef USE_BUZZER
+
+// optionale Sensoren
 #undef USE_DHT
 
-// Energy raus
-#undef USE_PZEM004T
-#undef USE_PZEM_AC
-#undef USE_ADE7953
-
-// Web minimal
+// Web-Extras reduzieren (WebUI bleibt erhalten!)
 #undef USE_WEBSEND_RESPONSE
+#undef USE_WEBSERVER_TLS
+#undef USE_MQTT_TLS
 
-// OTA reduzieren
-#undef USE_ARDUINO_OTA
+// ============================
+// NICHT ENTFERNEN (wichtig!)
+// ============================
+// USE_SCRIPT ✅
+// USE_SML_M ✅
+// USE_WEBSERVER ✅
+// USE_MQTT ✅ (lassen! sonst wird Build größer/instabil)
 
-// Logging minimal
-#define SYS_LOG_LEVEL 0
+// ============================
+// Logging klein halten
+// ============================
+#define SYS_LOG_LEVEL LOG_LEVEL_NONE
 #define SERIAL_LOG_LEVEL 0
 
-// SML optimieren
-#define MAX_METERS 2
+// ============================
+// SML optimieren (kleiner)
+// ============================
+#define MAX_METERS 1
 #define SML_BSIZ 48
 #define TMSBSIZ 128
 
