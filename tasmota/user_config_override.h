@@ -76,6 +76,16 @@
 // USE_WEBSERVER ✅
 // USE_MQTT ✅ (lassen! sonst wird Build größer/instabil)
 
+//letzter Feinsschliff
+#undef USE_HOME_ASSISTANT
+#undef USE_DOMOTICZ
+#undef USE_EMULATION_HUE
+#undef USE_EMULATION_WEMO
+#undef USE_DEVICE_GROUPS
+#undef USE_SERIAL_BRIDGE
+#undef USE_BUZZER
+
+
 // ============================
 // Logging klein halten
 // ============================
