@@ -15,11 +15,10 @@ jobs:
         run: pip install platformio
 
       - name: Build firmware
-        working-directory: tasmota
         run: pio run -e tasmota
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: tasmota/.pio/build/tasmota/firmware.bin
+          path: .pio/build/tasmota/firmware.bin
