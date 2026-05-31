@@ -15,6 +15,7 @@ jobs:
         run: pip install platformio
 
       - name: Build firmware
+        working-directory: tasmota
         run: pio run -e tasmota
 
       - name: Upload firmware
