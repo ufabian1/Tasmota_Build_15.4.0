@@ -1,7 +1,7 @@
 #ifndef _USER_CONFIG_OVERRIDE_H_
 #define _USER_CONFIG_OVERRIDE_H_
 
-// ===== Required for GS303 / sensor53 =====
+// ===== Pflicht für klassisches Tasmota-Script + Smart Meter =====
 #ifndef USE_SCRIPT
 #define USE_SCRIPT
 #endif
@@ -10,21 +10,34 @@
 #define USE_SML_M
 #endif
 
+// Laut Tasmota-Smart-Meter-Doku soll USE_RULES deaktiviert werden
+#ifdef USE_RULES
+#undef USE_RULES
+#endif
+
+// DS18x20 soll bei dir aktiv bleiben
 #ifndef USE_DS18x20
 #define USE_DS18x20
 #endif
 
-// ===== Keep basic web/API =====
-#ifndef USE_WEBSERVER
-#define USE_WEBSERVER
+// Community-erprobter Zusatz für SML-Builds
+#ifndef USE_UFILESYS
+#define USE_UFILESYS
 #endif
 
-// ===== Important: do NOT strip rule/script related internals =====
-// leave rules support available for components expecting shared symbols
+// ===== Problematische / unnötige Treiber für deinen Use Case aus =====
+// Diese Treiber haben in deinem Log bereits direkt mit Rules-/Script-Symbolen gekracht
+#ifdef USE_SHUTTER
+#undef USE_SHUTTER
+#endif
 
-// ===== Optional trimming: disable heavy features only =====
-#ifdef USE_ZIGBEE
-#undef USE_ZIGBEE
+#ifdef USE_PWM_DIMMER
+#undef USE_PWM_DIMMER
+#endif
+
+// Weitere große / unnötige Features für Wemos D1 mini abschalten
+#ifdef USE_ZIGBEE_ZNP
+#undef USE_ZIGBEE_ZNP
 #endif
 
 #ifdef USE_DISPLAY
@@ -35,16 +48,56 @@
 #undef USE_KNX
 #endif
 
-#ifdef USE_MQTT_TLS
-#undef USE_MQTT_TLS
+#ifdef USE_IR_REMOTE
+#undef USE_IR_REMOTE
 #endif
 
-#ifdef USE_WEBSERVER_TLS
-#undef USE_WEBSERVER_TLS
+#ifdef USE_IR_RECEIVE
+#undef USE_IR_RECEIVE
 #endif
 
-#ifdef USE_ARDUINO_OTA
-#undef USE_ARDUINO_OTA
+#ifdef USE_SERIAL_BRIDGE
+#undef USE_SERIAL_BRIDGE
+#endif
+
+#ifdef USE_ENERGY_MARGIN_DETECTION
+#undef USE_ENERGY_MARGIN_DETECTION
+#endif
+
+#ifdef USE_PZEM004T
+#undef USE_PZEM004T
+#endif
+
+#ifdef USE_PZEM_AC
+#undef USE_PZEM_AC
+#endif
+
+#ifdef USE_PZEM_DC
+#undef USE_PZEM_DC
+#endif
+
+#ifdef USE_MCP39F501
+#undef USE_MCP39F501
+#endif
+
+#ifdef USE_BL0940
+#undef USE_BL0940
+#endif
+
+#ifdef USE_DOMOTICZ
+#undef USE_DOMOTICZ
+#endif
+
+#ifdef USE_HOME_ASSISTANT
+#undef USE_HOME_ASSISTANT
+#endif
+
+#ifdef USE_EMULATION_HUE
+#undef USE_EMULATION_HUE
+#endif
+
+#ifdef USE_EMULATION_WEMO
+#undef USE_EMULATION_WEMO
 #endif
 
 #endif  // _USER_CONFIG_OVERRIDE_H_
